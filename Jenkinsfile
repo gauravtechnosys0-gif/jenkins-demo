@@ -6,7 +6,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                echo 'Repository already checked out by Jenkins'
+                checkout scm
             }
         }
 
@@ -14,36 +14,6 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh 'ls -la'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                echo 'Building Application'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running Tests'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploy Successful'
-            }
-        }
-    }
-}
-pipeline {
-    agent any
-
-    stages {
-
-        stage('Checkout') {
-            steps {
-                checkout scm
             }
         }
 
@@ -69,6 +39,7 @@ pipeline {
     }
 
     post {
+
         success {
             echo 'Deployment Successful!'
         }
@@ -76,5 +47,7 @@ pipeline {
         failure {
             echo 'Deployment Failed!'
         }
+
     }
+
 }
